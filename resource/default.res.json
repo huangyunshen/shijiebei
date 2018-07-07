@@ -1,0 +1,249 @@
+{
+	"groups": [
+		{
+			"keys": "description_json",
+			"name": "default"
+		},
+		{
+			"name": "preload",
+			"keys": "beilv_bg_png,bg_png,btn_1_png,btn_2_png,btn_jia_png,btn_jian_png,close_large_png,close_small_png,contry_bg_png,contry1_png,contry2_png,fof_bg_png,gxzj_png,icon_home_png,icon_jl_png,icon_share_png,icon_wallet_png,item_bg1_png,item_bg2_png,jilu_bg_png,vs_png,vs_bg_png,tuanchuang_png,beilv_bg2_png,bg2_png,btn_12_png,btn_22_png,btn_jia2_png,btn_jian2_png,close_large2_png,close_small2_png,contry_bg2_png,contry12_png,contry22_png,fof_bg2_png,gxzj2_png,icon_home2_png,icon_jl2_png,icon_share2_png,icon_wallet2_png,item_bg12_png,item_bg22_png,jilu_bg2_png,vs2_png,vs_bg2_png,tuanchuang2_png"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"name": "beilv_bg_png",
+			"type": "image",
+			"url": "assets/beilv_bg.png"
+		},
+		{
+			"name": "bg_png",
+			"type": "image",
+			"url": "assets/bg.png"
+		},
+		{
+			"name": "btn_1_png",
+			"type": "image",
+			"url": "assets/btn_1.png"
+		},
+		{
+			"name": "btn_2_png",
+			"type": "image",
+			"url": "assets/btn_2.png"
+		},
+		{
+			"name": "btn_jia_png",
+			"type": "image",
+			"url": "assets/btn_jia.png"
+		},
+		{
+			"name": "btn_jian_png",
+			"type": "image",
+			"url": "assets/btn_jian.png"
+		},
+		{
+			"name": "close_large_png",
+			"type": "image",
+			"url": "assets/close_large.png"
+		},
+		{
+			"name": "close_small_png",
+			"type": "image",
+			"url": "assets/close_small.png"
+		},
+		{
+			"name": "contry_bg_png",
+			"type": "image",
+			"url": "assets/contry_bg.png"
+		},
+		{
+			"name": "contry1_png",
+			"type": "image",
+			"url": "assets/contry1.png"
+		},
+		{
+			"name": "contry2_png",
+			"type": "image",
+			"url": "assets/contry2.png"
+		},
+		{
+			"name": "fof_bg_png",
+			"type": "image",
+			"url": "assets/fof_bg.png"
+		},
+		{
+			"name": "gxzj_png",
+			"type": "image",
+			"url": "assets/gxzj.png"
+		},
+		{
+			"name": "icon_home_png",
+			"type": "image",
+			"url": "assets/icon_home.png"
+		},
+		{
+			"name": "icon_jl_png",
+			"type": "image",
+			"url": "assets/icon_jl.png"
+		},
+		{
+			"name": "icon_share_png",
+			"type": "image",
+			"url": "assets/icon_share.png"
+		},
+		{
+			"name": "icon_wallet_png",
+			"type": "image",
+			"url": "assets/icon_wallet.png"
+		},
+		{
+			"name": "item_bg1_png",
+			"type": "image",
+			"url": "assets/item_bg1.png"
+		},
+		{
+			"name": "item_bg2_png",
+			"type": "image",
+			"url": "assets/item_bg2.png"
+		},
+		{
+			"name": "jilu_bg_png",
+			"type": "image",
+			"url": "assets/jilu_bg.png"
+		},
+		{
+			"name": "vs_png",
+			"type": "image",
+			"url": "assets/vs.png"
+		},
+		{
+			"name": "vs_bg_png",
+			"type": "image",
+			"url": "assets/vs_bg.png"
+		},
+		{
+			"name": "tuanchuang_png",
+			"type": "image",
+			"url": "assets/tuanchuang.png"
+		},
+		{
+			"name": "beilv_bg2_png",
+			"type": "image",
+			"url": "assets/beilv_bg.png"
+		},
+		{
+			"name": "bg2_png",
+			"type": "image",
+			"url": "assets/bg.png"
+		},
+		{
+			"name": "btn_12_png",
+			"type": "image",
+			"url": "assets/btn_1.png"
+		},
+		{
+			"name": "btn_22_png",
+			"type": "image",
+			"url": "assets/btn_2.png"
+		},
+		{
+			"name": "btn_jia2_png",
+			"type": "image",
+			"url": "assets/btn_jia.png"
+		},
+		{
+			"name": "btn_jian2_png",
+			"type": "image",
+			"url": "assets/btn_jian.png"
+		},
+		{
+			"name": "close_large2_png",
+			"type": "image",
+			"url": "assets/close_large.png"
+		},
+		{
+			"name": "close_small2_png",
+			"type": "image",
+			"url": "assets/close_small.png"
+		},
+		{
+			"name": "contry_bg2_png",
+			"type": "image",
+			"url": "assets/contry_bg.png"
+		},
+		{
+			"name": "contry12_png",
+			"type": "image",
+			"url": "assets/contry1.png"
+		},
+		{
+			"name": "contry22_png",
+			"type": "image",
+			"url": "assets/contry2.png"
+		},
+		{
+			"name": "fof_bg2_png",
+			"type": "image",
+			"url": "assets/fof_bg.png"
+		},
+		{
+			"name": "gxzj2_png",
+			"type": "image",
+			"url": "assets/gxzj.png"
+		},
+		{
+			"name": "icon_home2_png",
+			"type": "image",
+			"url": "assets/icon_home.png"
+		},
+		{
+			"name": "icon_jl2_png",
+			"type": "image",
+			"url": "assets/icon_jl.png"
+		},
+		{
+			"name": "icon_share2_png",
+			"type": "image",
+			"url": "assets/icon_share.png"
+		},
+		{
+			"name": "icon_wallet2_png",
+			"type": "image",
+			"url": "assets/icon_wallet.png"
+		},
+		{
+			"name": "item_bg12_png",
+			"type": "image",
+			"url": "assets/item_bg1.png"
+		},
+		{
+			"name": "item_bg22_png",
+			"type": "image",
+			"url": "assets/item_bg2.png"
+		},
+		{
+			"name": "jilu_bg2_png",
+			"type": "image",
+			"url": "assets/jilu_bg.png"
+		},
+		{
+			"name": "vs2_png",
+			"type": "image",
+			"url": "assets/vs.png"
+		},
+		{
+			"name": "vs_bg2_png",
+			"type": "image",
+			"url": "assets/vs_bg.png"
+		},
+		{
+			"name": "tuanchuang2_png",
+			"type": "image",
+			"url": "assets/tuanchuang.png"
+		}
+	]
+}
