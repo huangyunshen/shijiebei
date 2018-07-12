@@ -13,6 +13,7 @@ var Game = (function (_super) {
     __extends(Game, _super);
     function Game() {
         var _this = _super.call(this) || this;
+        _this.addChild(new Background());
         _this.addChild(new HeaderBar());
         _this.addChild(new Deadline());
         _this.addChild(new RaceParty());
@@ -41,6 +42,24 @@ var Game = (function (_super) {
 __reflect(Game.prototype, "Game");
 var TotalAmount;
 var HopeResult;
+var Background = (function (_super) {
+    __extends(Background, _super);
+    function Background() {
+        var _this = _super.call(this) || this;
+        _this.background();
+        return _this;
+    }
+    Background.prototype.background = function () {
+        var stageW = egret.MainContext.instance.stage.stageWidth;
+        var stageH = egret.MainContext.instance.stage.stageHeight;
+        var sky = createBitmapByName("bg_png");
+        this.addChild(sky);
+        sky.width = stageW;
+        sky.height = stageH;
+    };
+    return Background;
+}(egret.Sprite));
+__reflect(Background.prototype, "Background");
 var HeaderBar = (function (_super) {
     __extends(HeaderBar, _super);
     function HeaderBar() {
@@ -54,23 +73,13 @@ var HeaderBar = (function (_super) {
         eventButton["homeIcon"] = homeIcon;
         homeIcon.x = 31;
         homeIcon.y = 28;
-        var walletIcon = createBitmapByName("icon_wallet_png");
-        this.addChild(walletIcon);
-        eventButton["walletIcon"] = walletIcon;
-        walletIcon.x = 177;
-        walletIcon.y = 28;
         var recordIcon = createBitmapByName("icon_jl_png");
         this.addChild(recordIcon);
         eventButton["recordIcon"] = recordIcon;
-        recordIcon.x = 323;
+        recordIcon.x = 177;
         recordIcon.y = 28;
         recordIcon.touchEnabled = true;
         recordIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openRecord, this);
-        var shareIcon = createBitmapByName("icon_share_png");
-        this.addChild(shareIcon);
-        eventButton["shareIcon"] = shareIcon;
-        shareIcon.x = 470;
-        shareIcon.y = 28;
         this.myBalance();
     };
     HeaderBar.prototype.myBalance = function () {

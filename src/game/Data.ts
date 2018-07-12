@@ -1,6 +1,7 @@
 /** 游戏数据 */
-let ACCADDR:string = "0xb98d0cdf093d52618d2dea0ff564470a7b031b7a";    //账户地址
-let CONCADDR:string = "0x96CA8748E376fAcc0658C54766B0F0947C327D6E";   //合约地址
+let ACCADDR:string = "0xA5B725E03Ad76Ad9be88CBb3207D5a306C58600f";    //账户地址
+// let CONCADDR:string = "0xFc95083B18E649FB53C2e0856ef8Eb5E917E94b2";   //合约地址
+let CONCADDR:string = window.location.href.split('?')[1];   //合约地址
 let CONTRACTINFO;//合约信息
 let CONTRACTINSTANCE;//合约实例
 

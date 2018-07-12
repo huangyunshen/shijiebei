@@ -6,7 +6,7 @@ class Game extends egret.DisplayObjectContainer {
     public constructor() {
         super();
 
-        // this.addChild(new Background());
+        this.addChild(new Background());
         this.addChild(new HeaderBar());
         this.addChild(new Deadline());
         this.addChild(new RaceParty());
@@ -39,21 +39,21 @@ let HopeResult: egret.TextField;
 /**
  * 背景
  */
-// class Background extends egret.Sprite {
-//     public constructor() {
-//         super();
-//         this.background();
-//     }
-//     private background() {
-//         let stageW = egret.MainContext.instance.stage.stageWidth;
-//         let stageH = egret.MainContext.instance.stage.stageHeight;
-//
-//         let sky = createBitmapByName("bg_png");
-//         this.addChild(sky);
-//         sky.width = stageW;
-//         sky.height = stageH;
-//     }
-// }
+class Background extends egret.Sprite {
+    public constructor() {
+        super();
+        this.background();
+    }
+    private background() {
+        let stageW = egret.MainContext.instance.stage.stageWidth;
+        let stageH = egret.MainContext.instance.stage.stageHeight;
+
+        let sky = createBitmapByName("bg_png");
+        this.addChild(sky);
+        sky.width = stageW;
+        sky.height = stageH;
+    }
+}
 
 /** 顶部内容 */
 class HeaderBar extends egret.Sprite {
@@ -71,25 +71,25 @@ class HeaderBar extends egret.Sprite {
         homeIcon.x = 31;
         homeIcon.y = 28;
 
-        let walletIcon: egret.Bitmap = createBitmapByName("icon_wallet_png");
+       /* let walletIcon: egret.Bitmap = createBitmapByName("icon_wallet_png");
         this.addChild(walletIcon);
         eventButton["walletIcon"] = walletIcon;
         walletIcon.x = 177;
-        walletIcon.y = 28;
+        walletIcon.y = 28;*/
 
         let recordIcon: egret.Bitmap = createBitmapByName("icon_jl_png");
         this.addChild(recordIcon);
         eventButton["recordIcon"] = recordIcon;
-        recordIcon.x = 323;
+        recordIcon.x = 177;
         recordIcon.y = 28;
         recordIcon.touchEnabled = true;
         recordIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openRecord, this);
 
-        let shareIcon: egret.Bitmap = createBitmapByName("icon_share_png");
+        /*let shareIcon: egret.Bitmap = createBitmapByName("icon_share_png");
         this.addChild(shareIcon);
         eventButton["shareIcon"] = shareIcon;
         shareIcon.x = 470;
-        shareIcon.y = 28;
+        shareIcon.y = 28;*/
 
         this.myBalance();
     }
