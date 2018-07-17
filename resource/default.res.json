@@ -6,7 +6,7 @@
 		},
 		{
 			"name": "preload",
-			"keys": "beilv_bg_png,bg_png,btn_1_png,btn_2_png,btn_jia_png,btn_jian_png,close_large_png,close_small_png,contry_bg_png,contry1_png,contry2_png,fof_bg_png,gxzj_png,icon_home_png,icon_jl_png,icon_share_png,icon_wallet_png,item_bg1_png,item_bg2_png,jilu_bg_png,vs_png,vs_bg_png,tuanchuang_png,beilv_bg2_png,bg2_png,btn_12_png,btn_22_png,btn_jia2_png,btn_jian2_png,close_large2_png,close_small2_png,contry_bg2_png,contry12_png,contry22_png,fof_bg2_png,gxzj2_png,icon_home2_png,icon_jl2_png,icon_share2_png,icon_wallet2_png,item_bg12_png,item_bg22_png,jilu_bg2_png,vs2_png,vs_bg2_png,tuanchuang2_png"
+			"keys": "beilv_bg_png,bg_png,btn_1_png,btn_2_png,btn_jia_png,btn_jian_png,close_large_png,close_small_png,contry_bg_png,contry1_png,contry2_png,fof_bg_png,gxzj_png,icon_home_png,icon_jl_png,icon_share_png,icon_wallet_png,item_bg1_png,item_bg2_png,jilu_bg_png,vs_png,vs_bg_png,tuanchuang_png,beilv_bg2_png,bg2_png,btn_12_png,btn_22_png,btn_jia2_png,btn_jian2_png,close_large2_png,close_small2_png,contry_bg2_png,contry12_png,contry22_png,fof_bg2_png,gxzj2_png,icon_home2_png,icon_jl2_png,icon_share2_png,icon_wallet2_png,item_bg12_png,item_bg22_png,jilu_bg2_png,vs2_png,vs_bg2_png,tuanchuang2_png,icon_jc_png"
 		}
 	],
 	"resources": [
@@ -244,6 +244,11 @@
 			"name": "tuanchuang2_png",
 			"type": "image",
 			"url": "assets/tuanchuang.png"
+		},
+		{
+			"name": "icon_jc_png",
+			"type": "image",
+			"url": "assets/icon_jc.png"
 		}
 	]
 }

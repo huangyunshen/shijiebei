@@ -92,16 +92,19 @@ class HeaderBar extends egret.Sprite {
         shareIcon.y = 28;*/
 
         this.myBalance();
+        this.myCurrentBalance();
     }
 
     private myBalance() {
 
         let fofIcon1: egret.Bitmap = createBitmapByName("fof_bg_png");
         this.addChild(fofIcon1);
-        fofIcon1.x = 649;
-        fofIcon1.y = 28;
+        fofIcon1.x = 740;
+        fofIcon1.y = 130;
+        fofIcon1.scaleX=0.8;
+        fofIcon1.scaleY=0.8;
 
-        let balance = new CreateTextField({x: 752, y: 60, width: 300, tx: "0", size: 54}).create();
+        let balance = new CreateTextField({x: 770, y: 155, width: 300, tx: "0", size: 40}).create();
         this.addChild(balance);
 
         if (ACCADDR)
@@ -109,6 +112,23 @@ class HeaderBar extends egret.Sprite {
         setInterval(() => {
             getBalance(ACCADDR, balance)
         }, 3000)
+    }
+
+    private myCurrentBalance(){
+
+        let coinTotal:egret.Bitmap=createBitmapByName("icon_jc_png");
+        this.addChild(coinTotal);
+        coinTotal.x=740;
+        coinTotal.y=28;
+        coinTotal.scaleX=0.8;
+        coinTotal.scaleY=0.8;
+        let balanceTotal = new CreateTextField({x: 770, y: 55, width: 300, tx: "0", size: 40}).create();
+        this.addChild(balanceTotal);
+        getCurrentBalance( balanceTotal);
+        setInterval(() => {
+            getCurrentBalance( balanceTotal)
+        }, 3000)
+
     }
 
     private openRecord() {
@@ -146,8 +166,8 @@ class Deadline extends egret.Sprite {
 
     private deadline() {
         let container = new egret.Sprite();
-        container.x = 240;
-        container.y = 170;
+        container.x = 215;
+        container.y = 235;
 
         let rect = new egret.Shape();
         container.addChild(rect);
@@ -177,7 +197,7 @@ class RaceParty extends egret.Sprite {
         container.width = 1020;
         container.height = 427;
         container.x = 30;
-        container.y = 262;
+        container.y = 300;
 
         let bg = createBitmapByName("vs_bg_png");
         container.addChild(bg);
@@ -259,7 +279,7 @@ class BottomPour extends egret.Sprite {
         container1.width = this.btnWidth;
         container1.height = this.btnHeight;
         container1.x = 28;
-        container1.y = 743;
+        container1.y = 755;
         container1.$anchorOffsetX = container1.width / 2;
         container1.$anchorOffsetY = container1.height / 2;
         container1.x = container1.x + container1.width / 2;
@@ -280,7 +300,7 @@ class BottomPour extends egret.Sprite {
         container2.width = this.btnWidth;
         container2.height = this.btnHeight;
         container2.x = 378;
-        container2.y = 743;
+        container2.y = 755;
         container2.$anchorOffsetX = container2.width / 2;
         container2.$anchorOffsetY = container2.height / 2;
         container2.x = container2.x + container2.width / 2;
@@ -300,7 +320,7 @@ class BottomPour extends egret.Sprite {
         container3.width = this.btnWidth;
         container3.height = this.btnHeight;
         container3.x = 728;
-        container3.y = 743;
+        container3.y = 755;
         container3.$anchorOffsetX = container3.width / 2;
         container3.$anchorOffsetY = container3.height / 2;
         container3.x = container3.x + container3.width / 2;
