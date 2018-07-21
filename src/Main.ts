@@ -1,3 +1,4 @@
+
 class Main extends egret.DisplayObjectContainer {
     public constructor() {
         super();
@@ -22,8 +23,8 @@ class Main extends egret.DisplayObjectContainer {
             egret.ticker.resume();
         }
 
-        this.runGame().catch(e => {
-            console.log(e);
+        this.runGame().catch(err => {
+            console.log(err);
         })
     }
 
@@ -32,6 +33,7 @@ class Main extends egret.DisplayObjectContainer {
         let promise = this.getInfo();
         promise.then(() => {
             this.createGameScene()
+            document.getElementById('bgmMusic').play();
         });
         // const result = await RES.getResAsync("description_json")
         // this.startAnimation(result);

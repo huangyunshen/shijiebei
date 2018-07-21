@@ -1,5 +1,4 @@
 class Dialog extends egret.Sprite {
-    // public msg: string = "客官您好";
     public url:any;
 
     public constructor() {
@@ -33,7 +32,7 @@ class Dialog extends egret.Sprite {
         let bg = createBitmapByName("tuanchuang_png");
         content.addChild(bg);
 
-        let title = new CreateTextField({x: 0, y: 22, width: 280, tx: `提示`}).create();
+        let title = new CreateTextField({x: 0, y: 22, width: 280, tx: `提示`, color:0x57ffed}).create();
         content.addChild(title);
 
         let close = createBitmapByName("close_small_png");
@@ -71,8 +70,7 @@ class Dialog extends egret.Sprite {
     }
     private  submitEvent(flag:boolean):void {
         if(dialog.url){
-            console.log(dialog.url);
-            location.href = dialog.url;
+            window.open(dialog.url);
         }
         this.closeModal(flag)
     }

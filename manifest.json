@@ -8,12 +8,15 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
-		"bin-debug/LoadingUI.js",
-		"bin-debug/Main.js",
-		"bin-debug/Platform.js",
-		"bin-debug/game/Data.js",
 		"bin-debug/game/Dialog.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/Platform.js",
+		"bin-debug/game/Code.js",
+		"bin-debug/game/Data.js",
+		"bin-debug/Main.js",
 		"bin-debug/game/Game.js",
+		"bin-debug/game/Info.js",
+		"bin-debug/game/Password.js",
 		"bin-debug/game/Records.js",
 		"bin-debug/game/Unit.js"
 	]

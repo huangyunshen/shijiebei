@@ -5,8 +5,8 @@
 			"name": "default"
 		},
 		{
-			"name": "preload",
-			"keys": "beilv_bg_png,bg_png,btn_1_png,btn_2_png,btn_jia_png,btn_jian_png,close_large_png,close_small_png,contry_bg_png,contry1_png,contry2_png,fof_bg_png,gxzj_png,icon_home_png,icon_jl_png,icon_share_png,icon_wallet_png,item_bg1_png,item_bg2_png,jilu_bg_png,vs_png,vs_bg_png,tuanchuang_png,beilv_bg2_png,bg2_png,btn_12_png,btn_22_png,btn_jia2_png,btn_jian2_png,close_large2_png,close_small2_png,contry_bg2_png,contry12_png,contry22_png,fof_bg2_png,gxzj2_png,icon_home2_png,icon_jl2_png,icon_share2_png,icon_wallet2_png,item_bg12_png,item_bg22_png,jilu_bg2_png,vs2_png,vs_bg2_png,tuanchuang2_png,icon_jc_png"
+			"keys": "beilv_bg_png,bg_png,btn_1_png,btn_2_png,btn_jia_png,btn_jian_png,close_large_png,close_small_png,contry1_png,contry2_png,fof_bg_png,icon_home_png,icon_jc_png,icon_jl_png,tuanchuang_png,contry_bg_png,gxzj_png,item_bg1_png,item_bg2_png,jilu_bg_png,vs_png,vs_bg_png,icon_code_png,icon_zjxx_png,zjxx_bg_png",
+			"name": "preload"
 		}
 	],
 	"resources": [
@@ -16,239 +16,129 @@
 			"name": "description_json"
 		},
 		{
-			"name": "beilv_bg_png",
+			"url": "assets/beilv_bg.png",
 			"type": "image",
-			"url": "assets/beilv_bg.png"
+			"name": "beilv_bg_png"
 		},
 		{
-			"name": "bg_png",
+			"url": "assets/bg.png",
 			"type": "image",
-			"url": "assets/bg.png"
+			"name": "bg_png"
 		},
 		{
-			"name": "btn_1_png",
+			"url": "assets/btn_1.png",
 			"type": "image",
-			"url": "assets/btn_1.png"
+			"name": "btn_1_png"
 		},
 		{
-			"name": "btn_2_png",
+			"url": "assets/btn_2.png",
 			"type": "image",
-			"url": "assets/btn_2.png"
+			"name": "btn_2_png"
 		},
 		{
-			"name": "btn_jia_png",
+			"url": "assets/btn_jia.png",
 			"type": "image",
-			"url": "assets/btn_jia.png"
+			"name": "btn_jia_png"
 		},
 		{
-			"name": "btn_jian_png",
+			"url": "assets/btn_jian.png",
 			"type": "image",
-			"url": "assets/btn_jian.png"
+			"name": "btn_jian_png"
 		},
 		{
-			"name": "close_large_png",
+			"url": "assets/close_large.png",
 			"type": "image",
-			"url": "assets/close_large.png"
+			"name": "close_large_png"
 		},
 		{
-			"name": "close_small_png",
+			"url": "assets/close_small.png",
 			"type": "image",
-			"url": "assets/close_small.png"
+			"name": "close_small_png"
 		},
 		{
-			"name": "contry_bg_png",
+			"url": "assets/contry1.png",
 			"type": "image",
-			"url": "assets/contry_bg.png"
+			"name": "contry1_png"
 		},
 		{
-			"name": "contry1_png",
+			"url": "assets/contry2.png",
 			"type": "image",
-			"url": "assets/contry1.png"
+			"name": "contry2_png"
 		},
 		{
-			"name": "contry2_png",
+			"url": "assets/fof_bg.png",
 			"type": "image",
-			"url": "assets/contry2.png"
+			"name": "fof_bg_png"
 		},
 		{
-			"name": "fof_bg_png",
+			"url": "assets/icon_home.png",
 			"type": "image",
-			"url": "assets/fof_bg.png"
+			"name": "icon_home_png"
 		},
 		{
-			"name": "gxzj_png",
+			"url": "assets/icon_jc.png",
 			"type": "image",
-			"url": "assets/gxzj.png"
+			"name": "icon_jc_png"
 		},
 		{
-			"name": "icon_home_png",
+			"url": "assets/icon_jl.png",
 			"type": "image",
-			"url": "assets/icon_home.png"
+			"name": "icon_jl_png"
 		},
 		{
-			"name": "icon_jl_png",
+			"url": "assets/tuanchuang.png",
 			"type": "image",
-			"url": "assets/icon_jl.png"
+			"name": "tuanchuang_png"
 		},
 		{
-			"name": "icon_share_png",
+			"url": "assets/contry_bg.png",
 			"type": "image",
-			"url": "assets/icon_share.png"
+			"name": "contry_bg_png"
 		},
 		{
-			"name": "icon_wallet_png",
+			"url": "assets/gxzj.png",
 			"type": "image",
-			"url": "assets/icon_wallet.png"
+			"name": "gxzj_png"
 		},
 		{
-			"name": "item_bg1_png",
+			"url": "assets/item_bg1.png",
 			"type": "image",
-			"url": "assets/item_bg1.png"
+			"name": "item_bg1_png"
 		},
 		{
-			"name": "item_bg2_png",
+			"url": "assets/item_bg2.png",
 			"type": "image",
-			"url": "assets/item_bg2.png"
+			"name": "item_bg2_png"
 		},
 		{
-			"name": "jilu_bg_png",
+			"url": "assets/jilu_bg.png",
 			"type": "image",
-			"url": "assets/jilu_bg.png"
+			"name": "jilu_bg_png"
 		},
 		{
-			"name": "vs_png",
+			"url": "assets/vs.png",
 			"type": "image",
-			"url": "assets/vs.png"
+			"name": "vs_png"
 		},
 		{
-			"name": "vs_bg_png",
+			"url": "assets/vs_bg.png",
 			"type": "image",
-			"url": "assets/vs_bg.png"
+			"name": "vs_bg_png"
 		},
 		{
-			"name": "tuanchuang_png",
+			"name": "icon_code_png",
 			"type": "image",
-			"url": "assets/tuanchuang.png"
+			"url": "assets/icon_code.png"
 		},
 		{
-			"name": "beilv_bg2_png",
+			"name": "icon_zjxx_png",
 			"type": "image",
-			"url": "assets/beilv_bg.png"
+			"url": "assets/icon_zjxx.png"
 		},
 		{
-			"name": "bg2_png",
+			"name": "zjxx_bg_png",
 			"type": "image",
-			"url": "assets/bg.png"
-		},
-		{
-			"name": "btn_12_png",
-			"type": "image",
-			"url": "assets/btn_1.png"
-		},
-		{
-			"name": "btn_22_png",
-			"type": "image",
-			"url": "assets/btn_2.png"
-		},
-		{
-			"name": "btn_jia2_png",
-			"type": "image",
-			"url": "assets/btn_jia.png"
-		},
-		{
-			"name": "btn_jian2_png",
-			"type": "image",
-			"url": "assets/btn_jian.png"
-		},
-		{
-			"name": "close_large2_png",
-			"type": "image",
-			"url": "assets/close_large.png"
-		},
-		{
-			"name": "close_small2_png",
-			"type": "image",
-			"url": "assets/close_small.png"
-		},
-		{
-			"name": "contry_bg2_png",
-			"type": "image",
-			"url": "assets/contry_bg.png"
-		},
-		{
-			"name": "contry12_png",
-			"type": "image",
-			"url": "assets/contry1.png"
-		},
-		{
-			"name": "contry22_png",
-			"type": "image",
-			"url": "assets/contry2.png"
-		},
-		{
-			"name": "fof_bg2_png",
-			"type": "image",
-			"url": "assets/fof_bg.png"
-		},
-		{
-			"name": "gxzj2_png",
-			"type": "image",
-			"url": "assets/gxzj.png"
-		},
-		{
-			"name": "icon_home2_png",
-			"type": "image",
-			"url": "assets/icon_home.png"
-		},
-		{
-			"name": "icon_jl2_png",
-			"type": "image",
-			"url": "assets/icon_jl.png"
-		},
-		{
-			"name": "icon_share2_png",
-			"type": "image",
-			"url": "assets/icon_share.png"
-		},
-		{
-			"name": "icon_wallet2_png",
-			"type": "image",
-			"url": "assets/icon_wallet.png"
-		},
-		{
-			"name": "item_bg12_png",
-			"type": "image",
-			"url": "assets/item_bg1.png"
-		},
-		{
-			"name": "item_bg22_png",
-			"type": "image",
-			"url": "assets/item_bg2.png"
-		},
-		{
-			"name": "jilu_bg2_png",
-			"type": "image",
-			"url": "assets/jilu_bg.png"
-		},
-		{
-			"name": "vs2_png",
-			"type": "image",
-			"url": "assets/vs.png"
-		},
-		{
-			"name": "vs_bg2_png",
-			"type": "image",
-			"url": "assets/vs_bg.png"
-		},
-		{
-			"name": "tuanchuang2_png",
-			"type": "image",
-			"url": "assets/tuanchuang.png"
-		},
-		{
-			"name": "icon_jc_png",
-			"type": "image",
-			"url": "assets/icon_jc.png"
+			"url": "assets/zjxx_bg.png"
 		}
 	]
 }

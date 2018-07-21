@@ -10,6 +10,11 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var dialog;
 var records;
+var password;
+var infoMsg;
+var contractBalance;
+var sourceCode;
+var myBalance;
 var eventButton = {};
 var eventDialog = {};
 function eventButtonCtr(flag, show) {
@@ -77,7 +82,13 @@ var CreateTextField = (function () {
 }());
 __reflect(CreateTextField.prototype, "CreateTextField");
 function timestampToTime(timestamp) {
-    var date = new Date(timestamp * 1);
+    if (timestamp.length === 10) {
+        timestamp = timestamp * 1000;
+    }
+    else {
+        timestamp = timestamp * 1;
+    }
+    var date = new Date(timestamp);
     var Y = date.getFullYear() + '.';
     var M = fillZero(date.getMonth() + 1) + '.';
     var D = fillZero(date.getDate()) + ' ';
@@ -93,9 +104,9 @@ function fillZero(time) {
 function getRecord(size, num) {
     var _this = this;
     return new Promise(function (resolve, reject) {
-        var url = "http://39.104.81.103/api/requestGuessRecord.php";
+        var url = "/api/requestGuessRecord.php";
         var data = {
-            "addr": ACCADDR,
+            "addr": getActiveAccount().address,
             "liveId": CONTRACTINFO[11],
             "pageSize": size,
             "pageNum": num
@@ -121,4 +132,34 @@ function getRecord(size, num) {
             console.log(err);
         }, _this);
     });
+}
+function ifWalletExist() {
+    var walletJSON = localStorage.getItem('web3js_wallet');
+    if (walletJSON) {
+        return walletJSON;
+    }
+    else {
+        return false;
+    }
+}
+function loadWallet(pwd) {
+    return web3.eth.accounts.wallet.load(pwd);
+}
+function verifyWalletPwd(pwd) {
+    var _this = this;
+    return new Promise(function (resolve, reject) {
+        try {
+            var wallet = _this.loadWallet(pwd);
+            resolve(wallet);
+        }
+        catch (e) {
+            reject(e);
+        }
+    });
+}
+function getActiveAccount() {
+    var wallet = web3.eth.accounts.wallet;
+    var index = localStorage.getItem('active_account');
+    var activeAccount = wallet[index] || new Error('Wallet Is Locked');
+    return activeAccount;
 }

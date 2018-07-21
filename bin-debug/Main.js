@@ -61,8 +61,8 @@ var Main = (function (_super) {
         egret.lifecycle.onResume = function () {
             egret.ticker.resume();
         };
-        this.runGame().catch(function (e) {
-            console.log(e);
+        this.runGame().catch(function (err) {
+            console.log(err);
         });
     };
     Main.prototype.runGame = function () {
@@ -77,6 +77,7 @@ var Main = (function (_super) {
                         promise = this.getInfo();
                         promise.then(function () {
                             _this.createGameScene();
+                            document.getElementById('bgmMusic').play();
                         });
                         return [2];
                 }

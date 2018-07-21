@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>世界杯竞猜</title>
+    <title>赛事竞猜</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="full-screen" content="true" />
@@ -13,8 +13,7 @@
     <style>
         html, body {
             -ms-touch-action: none;
-            background: #000000;
-            /* background:url("./resource/assets/bg.png") no-repeat; */
+            background:url("./resource/assets/bg_icon.png") no-repeat #02a167; 
             background-size: cover;
             padding: 0;
             border: 0;
@@ -25,6 +24,8 @@
 </head>
 
 <body>
+<audio id="bgmMusic" style="position:absolute;" src="resource/assets/back.mp3" autoplay='autoplay' loop="loop">audio标签。</audio>  
+
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
          data-orientation="auto"
@@ -36,10 +37,11 @@
          data-show-fps="false" data-show-log="false"
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
-    <script src="./libs/web3.min.js"></script>
+<script src="./libs/web3.min.js"></script>
+<script src="./libs/ethers.min.js"></script>
 <script>
-    var web3 = new Web3("ws://39.104.81.103:8561")
 
+    var web3 = new Web3("ws://39.104.81.103:8661")
     var loadScript = function (list, callback) {
         var loaded = 0;
         var loadNext = function () {

@@ -8,7 +8,6 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
-var gameContent;
 var Game = (function (_super) {
     __extends(Game, _super);
     function Game() {
@@ -24,7 +23,6 @@ var Game = (function (_super) {
         dialog = new Dialog();
         dialog.alpha = 0;
         _this.addChild(dialog);
-        gameContent = _this;
         CONTRACTINSTANCE.events
             .returnBetResult()
             .on('data', function (event) {
@@ -50,12 +48,8 @@ var Background = (function (_super) {
         return _this;
     }
     Background.prototype.background = function () {
-        var stageW = egret.MainContext.instance.stage.stageWidth;
-        var stageH = egret.MainContext.instance.stage.stageHeight;
         var sky = createBitmapByName("bg_png");
         this.addChild(sky);
-        sky.width = stageW;
-        sky.height = stageH;
     };
     return Background;
 }(egret.Sprite));
@@ -80,24 +74,57 @@ var HeaderBar = (function (_super) {
         recordIcon.y = 28;
         recordIcon.touchEnabled = true;
         recordIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openRecord, this);
+        var infoIcon = createBitmapByName("icon_zjxx_png");
+        this.addChild(infoIcon);
+        eventButton["infoIcon"] = infoIcon;
+        infoIcon.x = 323;
+        infoIcon.y = 28;
+        infoIcon.touchEnabled = true;
+        infoIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openInfo, this);
+        var codeIcon = createBitmapByName("icon_code_png");
+        this.addChild(codeIcon);
+        eventButton["codeIcon"] = codeIcon;
+        codeIcon.x = 470;
+        codeIcon.y = 28;
+        codeIcon.touchEnabled = true;
+        codeIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openCode, this);
         this.myBalance();
+        this.contractBalance();
     };
     HeaderBar.prototype.myBalance = function () {
         var fofIcon1 = createBitmapByName("fof_bg_png");
         this.addChild(fofIcon1);
-        fofIcon1.x = 649;
-        fofIcon1.y = 28;
-        var balance = new CreateTextField({ x: 752, y: 60, width: 300, tx: "0", size: 54 }).create();
+        fofIcon1.x = 740;
+        fofIcon1.y = 130;
+        fofIcon1.scaleX = 0.8;
+        fofIcon1.scaleY = 0.8;
+        var balance = new CreateTextField({ x: 770, y: 155, width: 300, tx: "0", size: 40 }).create();
         this.addChild(balance);
-        if (ACCADDR)
-            getBalance(ACCADDR, balance);
+        myBalance = balance;
+    };
+    HeaderBar.prototype.contractBalance = function () {
+        var coinTotal = createBitmapByName("icon_jc_png");
+        this.addChild(coinTotal);
+        coinTotal.x = 740;
+        coinTotal.y = 28;
+        coinTotal.scaleX = 0.8;
+        coinTotal.scaleY = 0.8;
+        var balanceTotal = new CreateTextField({ x: 770, y: 55, width: 300, tx: "0", size: 40 }).create();
+        this.addChild(balanceTotal);
+        if (CONCADDR) {
+            getBalance(CONCADDR, balanceTotal, function (balance) {
+                contractBalance = web3.utils.fromWei(balance, 'ether');
+            });
+        }
         setInterval(function () {
-            getBalance(ACCADDR, balance);
+            getBalance(CONCADDR, balanceTotal, function (balance) {
+                contractBalance = web3.utils.fromWei(balance, 'ether');
+            });
         }, 3000);
     };
     HeaderBar.prototype.openRecord = function () {
         eventButtonCtr(false);
-        getRecord(5, 1).then(function (res) {
+        getRecord(100, 1).then(function (res) {
             console.log(res);
             records = new Records(res);
             egret.MainContext.instance.stage.addChild(records);
@@ -105,6 +132,33 @@ var HeaderBar = (function (_super) {
             eventButtonCtr(true);
             console.log(err);
         });
+    };
+    HeaderBar.prototype.openInfo = function () {
+        eventButtonCtr(false);
+        if (!infoMsg)
+            infoMsg = new Info();
+        egret.MainContext.instance.stage.addChild(infoMsg);
+    };
+    HeaderBar.prototype.openCode = function () {
+        eventButtonCtr(false);
+        if (!sourceCode) {
+            var request = new egret.HttpRequest();
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open('/quiz/contract/playGame.sol', egret.HttpMethod.GET);
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.send();
+            request.addEventListener(egret.Event.COMPLETE, function (event) {
+                var request = event.currentTarget;
+                sourceCode = new Code(request.response);
+                egret.MainContext.instance.stage.addChild(sourceCode);
+            }, this);
+            request.addEventListener(egret.IOErrorEvent.IO_ERROR, function () {
+                showDialog("网络连接错误，请检查网络！");
+            }, this);
+        }
+        else {
+            egret.MainContext.instance.stage.addChild(sourceCode);
+        }
     };
     return HeaderBar;
 }(egret.Sprite));
@@ -118,8 +172,8 @@ var Deadline = (function (_super) {
     }
     Deadline.prototype.deadline = function () {
         var container = new egret.Sprite();
-        container.x = 240;
-        container.y = 170;
+        container.x = 215;
+        container.y = 235;
         var rect = new egret.Shape();
         container.addChild(rect);
         rect.graphics.beginFill(0x022617, 0.5);
@@ -145,7 +199,7 @@ var RaceParty = (function (_super) {
         container.width = 1020;
         container.height = 427;
         container.x = 30;
-        container.y = 262;
+        container.y = 300;
         var bg = createBitmapByName("vs_bg_png");
         container.addChild(bg);
         var homeTeam = createBitmapByName("contry1_png");
@@ -216,7 +270,7 @@ var BottomPour = (function (_super) {
         container1.width = this.btnWidth;
         container1.height = this.btnHeight;
         container1.x = 28;
-        container1.y = 743;
+        container1.y = 755;
         container1.$anchorOffsetX = container1.width / 2;
         container1.$anchorOffsetY = container1.height / 2;
         container1.x = container1.x + container1.width / 2;
@@ -235,7 +289,7 @@ var BottomPour = (function (_super) {
         container2.width = this.btnWidth;
         container2.height = this.btnHeight;
         container2.x = 378;
-        container2.y = 743;
+        container2.y = 755;
         container2.$anchorOffsetX = container2.width / 2;
         container2.$anchorOffsetY = container2.height / 2;
         container2.x = container2.x + container2.width / 2;
@@ -254,7 +308,7 @@ var BottomPour = (function (_super) {
         container3.width = this.btnWidth;
         container3.height = this.btnHeight;
         container3.x = 728;
-        container3.y = 743;
+        container3.y = 755;
         container3.$anchorOffsetX = container3.width / 2;
         container3.$anchorOffsetY = container3.height / 2;
         container3.x = container3.x + container3.width / 2;
@@ -365,7 +419,6 @@ var Multiple = (function (_super) {
             e.target.text = "99";
         }
         multiplying = e.target.text;
-        console.log(multiplying);
         if (selected["zhusheng"] || selected["ping"] || selected["kesheng"]) {
             var triger = new TrigerEvent();
             var change = new ChangeEvent();
@@ -383,7 +436,6 @@ var Multiple = (function (_super) {
             num--;
         }
         multiplying = txInput.text = String(num);
-        console.log(multiplying);
         if (selected["zhusheng"] || selected["ping"] || selected["kesheng"]) {
             var triger = new TrigerEvent();
             var change = new ChangeEvent();
@@ -420,10 +472,18 @@ var SubmitBtn = (function (_super) {
     };
     SubmitBtn.prototype.submitEvent = function (obj, e) {
         var _this = this;
-        if (!ACCADDR) {
-            showDialog("未登录，点击确定跳转登陆");
+        if (!ifWalletExist()) {
+            showDialog("请创建钱包并登录", location.origin);
             return;
         }
+        var account = getActiveAccount();
+        if (account.message) {
+            eventButtonCtr(false);
+            password = new Password();
+            egret.MainContext.instance.stage.addChild(password);
+            return;
+        }
+        var address = account.address;
         var num = 0;
         var total;
         var maxOdds = [];
@@ -448,7 +508,7 @@ var SubmitBtn = (function (_super) {
             showDialog("请选择下注方");
             return;
         }
-        getBalance(ACCADDR, null, function (data) {
+        getBalance(address, null, function (data) {
             if (total > data) {
                 showDialog("余额不足，请充值");
                 return;
@@ -474,13 +534,16 @@ var SubmitBtn = (function (_super) {
                     tw.to({ alpha: 0.2 }, 1000);
                     tw.to({ alpha: 1 }, 1000);
                     eventButtonCtr(false);
-                    CONTRACTINSTANCE.methods.betFun(ACCADDR, arr, total, num, maximum)
+                    CONTRACTINSTANCE.methods.betFun(address, arr, total, num, maximum)
                         .send({
-                        from: ACCADDR,
+                        from: address,
                         value: total,
-                        gas: 210000,
+                        gas: 4700000,
+                        txType: 0
                     })
                         .on('error', function (err) {
+                        console.log("aaa:");
+                        console.log(err);
                         showDialog(err);
                     })
                         .on('receipt', function (receipt) {
@@ -492,7 +555,7 @@ var SubmitBtn = (function (_super) {
                         var contractInfo = JSON.stringify(CONTRACTINFO);
                         contractInfo = contractInfo.replace(/\"/g, "'");
                         var data = {
-                            "addr": ACCADDR,
+                            "addr": address,
                             "contractAddr": CONCADDR,
                             "contractInfo": contractInfo,
                             "deadline": timestampToTime(CONTRACTINFO[7]),
@@ -502,7 +565,6 @@ var SubmitBtn = (function (_super) {
                             "selected": selected,
                             "liveId": CONTRACTINFO[11]
                         };
-                        console.log(data);
                         var request = new egret.HttpRequest();
                         request.responseType = egret.HttpResponseType.TEXT;
                         request.open(url, egret.HttpMethod.POST);

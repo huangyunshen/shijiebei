@@ -40,9 +40,9 @@ class Records extends egret.Sprite {
         close.touchEnabled = true;
         close.addEventListener(egret.TouchEvent.TOUCH_TAP, this.closeModal, this);
 
-        let message = new CreateTextField({x: 45, y: 160, width: 695, height: 100, tx: ""}).create();
-        message.verticalAlign = egret.VerticalAlign.MIDDLE;
-        content.addChild(message);
+        // let message = new CreateTextField({x: 45, y: 160, width: 695, height: 100, tx: ""}).create();
+        // message.verticalAlign = egret.VerticalAlign.MIDDLE;
+        // content.addChild(message);
 
         let myScrollView = new egret.ScrollView();
         myScrollView.width = 980;
@@ -51,7 +51,7 @@ class Records extends egret.Sprite {
 
         let sprite = new egret.Sprite();
         for(var i = 0; i<this.arr.length; i++){
-            let con = this.record(i, "世界杯", this.arr[i].time, CONTRACTINFO, this.arr[i].selected, this.arr[i].multiple, this.arr[i].score.homeTeam, this.arr[i].score.guestTeam);
+            let con = this.record(i, this.arr[i].time, CONTRACTINFO, this.arr[i].selected, this.arr[i].multiple, this.arr[i].score.homeTeam, this.arr[i].score.guestTeam);
             sprite.addChild(con);
         }
 
@@ -67,7 +67,7 @@ class Records extends egret.Sprite {
         eventButtonCtr(true);
     }
 
-    private record(_index, _Name, _time, _info, _selected, _multiple, _hScore, _vScore) {
+    private record(_index,  _time, _info, _selected, _multiple, _hScore, _vScore) {
         let singAmount = Number(_info[8])
 
         let container = new egret.Sprite();
@@ -87,7 +87,7 @@ class Records extends egret.Sprite {
         bg.graphics.endFill();
         container.addChild(bg);
 
-        let name = new CreateTextField({x: 20, y: 26, width: 400, align: "left", tx: _Name, size: 40}).create();
+        let name = new CreateTextField({x: 20, y: 26, width: 400, align: "left", tx: _info[1], size: 40}).create();
         container.addChild(name);
 
         let time = new CreateTextField({

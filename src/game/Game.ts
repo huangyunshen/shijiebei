@@ -1,5 +1,4 @@
 /** 游戏主程序 */
-let gameContent;
 
 class Game extends egret.DisplayObjectContainer {
 
@@ -17,7 +16,6 @@ class Game extends egret.DisplayObjectContainer {
         dialog = new Dialog();
         dialog.alpha = 0;
         this.addChild(dialog);
-        gameContent = this;
 
         //在界面渲染完成后启动监听
         CONTRACTINSTANCE.events
@@ -45,13 +43,13 @@ class Background extends egret.Sprite {
         this.background();
     }
     private background() {
-        let stageW = egret.MainContext.instance.stage.stageWidth;
-        let stageH = egret.MainContext.instance.stage.stageHeight;
+        // let stageW = egret.MainContext.instance.stage.stageWidth;
+        // let stageH = egret.MainContext.instance.stage.stageHeight;
 
         let sky = createBitmapByName("bg_png");
         this.addChild(sky);
-        sky.width = stageW;
-        sky.height = stageH;
+        //sky.width = stageW;
+        //sky.height = stageH;
     }
 }
 
@@ -71,12 +69,6 @@ class HeaderBar extends egret.Sprite {
         homeIcon.x = 31;
         homeIcon.y = 28;
 
-       /* let walletIcon: egret.Bitmap = createBitmapByName("icon_wallet_png");
-        this.addChild(walletIcon);
-        eventButton["walletIcon"] = walletIcon;
-        walletIcon.x = 177;
-        walletIcon.y = 28;*/
-
         let recordIcon: egret.Bitmap = createBitmapByName("icon_jl_png");
         this.addChild(recordIcon);
         eventButton["recordIcon"] = recordIcon;
@@ -85,14 +77,24 @@ class HeaderBar extends egret.Sprite {
         recordIcon.touchEnabled = true;
         recordIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openRecord, this);
 
-        /*let shareIcon: egret.Bitmap = createBitmapByName("icon_share_png");
-        this.addChild(shareIcon);
-        eventButton["shareIcon"] = shareIcon;
-        shareIcon.x = 470;
-        shareIcon.y = 28;*/
+        let infoIcon: egret.Bitmap = createBitmapByName("icon_zjxx_png");
+        this.addChild(infoIcon);
+        eventButton["infoIcon"] = infoIcon;
+        infoIcon.x = 323;
+        infoIcon.y = 28;     
+        infoIcon.touchEnabled = true;
+        infoIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openInfo, this);
+
+        let codeIcon: egret.Bitmap = createBitmapByName("icon_code_png");
+        this.addChild(codeIcon);
+        eventButton["codeIcon"] = codeIcon;
+        codeIcon.x = 470;
+        codeIcon.y = 28;
+        codeIcon.touchEnabled = true;
+        codeIcon.addEventListener(egret.TouchEvent.TOUCH_TAP, this.openCode, this);
 
         this.myBalance();
-        this.myCurrentBalance();
+        this.contractBalance();
     }
 
     private myBalance() {
@@ -101,50 +103,40 @@ class HeaderBar extends egret.Sprite {
         this.addChild(fofIcon1);
         fofIcon1.x = 740;
         fofIcon1.y = 130;
-        fofIcon1.scaleX=0.8;
-        fofIcon1.scaleY=0.8;
+        fofIcon1.scaleX = 0.8;
+        fofIcon1.scaleY = 0.8;
 
-        let balance = new CreateTextField({x: 770, y: 155, width: 300, tx: "0", size: 40}).create();
+        let balance = new CreateTextField({ x: 770, y: 155, width: 300, tx: "0", size: 40 }).create();
         this.addChild(balance);
-
-        if (ACCADDR)
-            getBalance(ACCADDR, balance)
-        setInterval(() => {
-            getBalance(ACCADDR, balance)
-        }, 3000)
+        myBalance = balance;
     }
 
-    private myCurrentBalance(){
+    private contractBalance() {
 
-        let coinTotal:egret.Bitmap=createBitmapByName("icon_jc_png");
+        let coinTotal: egret.Bitmap = createBitmapByName("icon_jc_png");
         this.addChild(coinTotal);
-        coinTotal.x=740;
-        coinTotal.y=28;
-        coinTotal.scaleX=0.8;
-        coinTotal.scaleY=0.8;
-        let balanceTotal = new CreateTextField({x: 770, y: 55, width: 300, tx: "0", size: 40}).create();
+        coinTotal.x = 740;
+        coinTotal.y = 28;
+        coinTotal.scaleX = 0.8;
+        coinTotal.scaleY = 0.8;
+        let balanceTotal = new CreateTextField({ x: 770, y: 55, width: 300, tx: "0", size: 40 }).create();
         this.addChild(balanceTotal);
-        getCurrentBalance( balanceTotal);
-        setInterval(() => {
-            getCurrentBalance( balanceTotal)
-        }, 3000)
 
+        if (CONCADDR){            
+            getBalance(CONCADDR, balanceTotal, (balance) => {
+                contractBalance = web3.utils.fromWei(balance, 'ether');
+            })
+        }
+        setInterval(() => {
+            getBalance(CONCADDR, balanceTotal, (balance) => {
+                contractBalance = web3.utils.fromWei(balance, 'ether');
+            })
+        }, 3000)
     }
 
     private openRecord() {
-        // let arr = [
-        //     {
-        //         Name: "世界杯",
-        //         time: 1531069385000,
-        //         info: CONTRACTINFO,
-        //         selected: {"zhusheng": true, "ping": false, "kesheng": false,},
-        //         multiple: "5",
-        //         hScore: 3,
-        //         vScore: 1
-        //     }
-        // ]
         eventButtonCtr(false);
-        getRecord(5,1).then((res) => {
+        getRecord(100, 1).then((res) => {
             console.log(res);
             records = new Records(res);
             egret.MainContext.instance.stage.addChild(records);
@@ -152,6 +144,31 @@ class HeaderBar extends egret.Sprite {
             eventButtonCtr(true);
             console.log(err);
         });
+    }
+    private openInfo() {
+        eventButtonCtr(false);  
+        if(!infoMsg) infoMsg = new Info();
+        egret.MainContext.instance.stage.addChild(infoMsg);
+    }
+    private openCode() {
+        eventButtonCtr(false);
+        if(!sourceCode) {
+             let request = new egret.HttpRequest();
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open('/quiz/contract/playGame.sol', egret.HttpMethod.GET);
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.send();
+            request.addEventListener(egret.Event.COMPLETE, (event) => {
+                let request = <egret.HttpRequest>event.currentTarget;
+                sourceCode = new Code(request.response);
+                egret.MainContext.instance.stage.addChild(sourceCode);
+            }, this);
+            request.addEventListener(egret.IOErrorEvent.IO_ERROR, () => {
+                   showDialog("网络连接错误，请检查网络！");
+            }, this);
+        } else {
+            egret.MainContext.instance.stage.addChild(sourceCode);
+        }
     }
 }
 
@@ -176,7 +193,7 @@ class Deadline extends egret.Sprite {
         rect.graphics.endFill();
 
         let time = timestampToTime(CONTRACTINFO[7]);
-        let text = new CreateTextField({y: 13, width: 600, color: 0xc6f1ff, tx: `下注截止时间  ${time}`, size: 36}).create();
+        let text = new CreateTextField({ y: 13, width: 600, color: 0xc6f1ff, tx: `下注截止时间  ${time}`, size: 36 }).create();
         container.addChild(text);
 
         this.addChild(container);
@@ -222,7 +239,7 @@ class RaceParty extends egret.Sprite {
         }).create();
         container.addChild(text1);
 
-        let text2 = new CreateTextField({x: 625, y: 250, width: 250, tx: `${CONTRACTINFO[3]}`, size: 30}).create();
+        let text2 = new CreateTextField({ x: 625, y: 250, width: 250, tx: `${CONTRACTINFO[3]}`, size: 30 }).create();
         container.addChild(text2);
 
         if (CONTRACTINFO[9] !== "0") {
@@ -246,7 +263,7 @@ class RaceParty extends egret.Sprite {
         rect.graphics.drawRoundRect(0, 0, 136, 48, 20);
         rect.graphics.endFill();
         container.addChild(rect);
-        let text = new CreateTextField({x: 0, y: 8, width: 136, color: 0xff9d55, tx: `让${t}球`, size: 36}).create();
+        let text = new CreateTextField({ x: 0, y: 8, width: 136, color: 0xff9d55, tx: `让${t}球`, size: 36 }).create();
         container.addChild(text);
         return container;
     }
@@ -267,11 +284,11 @@ class BottomPour extends egret.Sprite {
 
     private bottomPour() {
         let text1 = (t: string) => {
-            let text = new CreateTextField({y: 43, width: this.btnWidth, tx: t, size: 48}).create();
+            let text = new CreateTextField({ y: 43, width: this.btnWidth, tx: t, size: 48 }).create();
             return text;
         }
         let text2 = (t: string) => {
-            let text = new CreateTextField({y: 119, width: this.btnWidth, color: 0xfedc01, tx: t}).create();
+            let text = new CreateTextField({ y: 119, width: this.btnWidth, color: 0xfedc01, tx: t }).create();
             return text;
         }
 
@@ -347,8 +364,8 @@ class BottomPour extends egret.Sprite {
             selected[e.target.btnName] = e.target.odds;
 
             egret.Tween.get(container)
-                .to({scaleX: 0.98, scaleY: 0.98}, 100, egret.Ease.circIn)
-                .to({scaleX: 1, scaleY: 1}, 100, egret.Ease.circIn);
+                .to({ scaleX: 0.98, scaleY: 0.98 }, 100, egret.Ease.circIn)
+                .to({ scaleX: 1, scaleY: 1 }, 100, egret.Ease.circIn);
         }
         e.target.isChoosed = !e.target.isChoosed;
         let triger = new TrigerEvent();
@@ -376,7 +393,7 @@ class Multiple extends egret.Sprite {
         background.x = 40;
         background.y = 989;
 
-        let beilv = new CreateTextField({x: 80, y: 1006, width: 100, tx: "倍率", size: 42}).create();
+        let beilv = new CreateTextField({ x: 80, y: 1006, width: 100, tx: "倍率", size: 42 }).create();
         this.addChild(beilv);
 
         let danzhu = new CreateTextField({
@@ -413,7 +430,7 @@ class Multiple extends egret.Sprite {
         eventButton["txInput"] = txInput;
         txInput.addEventListener(egret.Event.CHANGE, this.onMultipleInput, this);
 
-        let zong = new CreateTextField({x: 200, y: 1273, width: 680, color: 0x53fc9b, tx: "总金额：0FOF"}).create();
+        let zong = new CreateTextField({ x: 200, y: 1273, width: 680, color: 0x53fc9b, tx: "总金额：0FOF" }).create();
         this.addChild(zong);
         TotalAmount = zong;
 
@@ -447,7 +464,6 @@ class Multiple extends egret.Sprite {
             e.target.text = "99";
         }
         multiplying = e.target.text;
-        console.log(multiplying);
 
         if (selected["zhusheng"] || selected["ping"] || selected["kesheng"]) {
 
@@ -467,7 +483,6 @@ class Multiple extends egret.Sprite {
             num--;
         }
         multiplying = txInput.text = String(num);
-        console.log(multiplying);
 
         if (selected["zhusheng"] || selected["ping"] || selected["kesheng"]) {
 
@@ -499,7 +514,7 @@ class SubmitBtn extends egret.Sprite {
         rect.graphics.drawRoundRect(0, 0, 750, 124, 10);
         rect.graphics.endFill();
 
-        let btnText = new CreateTextField({y: 35, width: 750, color: 0x5a3c0c, tx: "确定下注", size: 56}).create();
+        let btnText = new CreateTextField({ y: 35, width: 750, color: 0x5a3c0c, tx: "确定下注", size: 56 }).create();
         container.addChild(btnText);
         this.addChild(container);
         eventButton["container"] = container;
@@ -510,10 +525,19 @@ class SubmitBtn extends egret.Sprite {
 
     private submitEvent(obj, e: egret.TouchEvent): void {
 
-        if (!ACCADDR) {
-            showDialog("未登录，点击确定跳转登陆");
+        if (!ifWalletExist()) {
+            showDialog("请创建钱包并登录", location.origin);
             return;
         }
+        let account = getActiveAccount()   
+        
+        if (account.message) {
+            eventButtonCtr(false);
+            password = new Password();
+            egret.MainContext.instance.stage.addChild(password);
+            return;
+        }
+        let address = account.address
 
         let num = 0;        //下注方的数量
         let total;          //下注总金额
@@ -541,12 +565,12 @@ class SubmitBtn extends egret.Sprite {
             return;
         }
 
-        getBalance(ACCADDR, null, (data) => {
+        getBalance(address, null, (data) => {
             if (total > data) {
                 showDialog("余额不足，请充值");
                 return;
             }
-
+            
             CONTRACTINSTANCE.methods.getNow().call().then((now) => {  //获取当前时间
                 now = now + 10000 //纠正10秒
                 if (now > CONTRACTINFO[7]) {
@@ -565,20 +589,22 @@ class SubmitBtn extends egret.Sprite {
                     let textObj = obj.$children[1]
                     textObj.text = "正在下注...";
 
-                    let tw = egret.Tween.get(textObj, {loop: true});//开始动画
-                    tw.to({alpha: 0.2}, 1000);
-                    tw.to({alpha: 1}, 1000);
+                    let tw = egret.Tween.get(textObj, { loop: true });//开始动画
+                    tw.to({ alpha: 0.2 }, 1000);
+                    tw.to({ alpha: 1 }, 1000);
 
                     eventButtonCtr(false); //关闭其他按钮点击事件
 
-                    CONTRACTINSTANCE.methods.betFun(ACCADDR, arr, total, num, maximum)
+                    CONTRACTINSTANCE.methods.betFun(address, arr, total, num, maximum)
                         .send({
-                            from: ACCADDR,
-                            // gasPrice: 200000000000,
+                            from: address,
                             value: total,
-                            gas: 210000,
+                            gas: 4700000,
+                            txType:0
                         })
                         .on('error', (err) => {
+                            console.log("aaa:")
+                            console.log(err)
                             showDialog(err);
                         })
                         .on('receipt', (receipt) => {
@@ -591,7 +617,7 @@ class SubmitBtn extends egret.Sprite {
                             let contractInfo = JSON.stringify(CONTRACTINFO)
                             contractInfo = contractInfo.replace(/\"/g, "'")
                             let data = {
-                                "addr": ACCADDR,
+                                "addr": address,
                                 "contractAddr": CONCADDR,
                                 "contractInfo": contractInfo,
                                 "deadline": timestampToTime(CONTRACTINFO[7]),
@@ -601,10 +627,6 @@ class SubmitBtn extends egret.Sprite {
                                 "selected": selected,
                                 "liveId": CONTRACTINFO[11]
                             }
-                            console.log(data);
-
-                            // let eeeeeeefe = JSON.parse(str.replace(/\'/g,'"'))
-                            // console.log(eeeeeeefe);
 
                             let request = new egret.HttpRequest();
                             request.responseType = egret.HttpResponseType.TEXT;
@@ -636,7 +658,7 @@ class HopeBonus extends egret.Sprite {
     }
 
     private addTextView() {
-        let estResult = new CreateTextField({x: 165, y: 1590, width: 750, color: 0x8bffd7, tx: "预计奖金：0 FOF"}).create();
+        let estResult = new CreateTextField({ x: 165, y: 1590, width: 750, color: 0x8bffd7, tx: "预计奖金：0 FOF" }).create();
         this.addChild(estResult);
         HopeResult = estResult;
     }
@@ -688,8 +710,8 @@ class ChangeEvent extends egret.Sprite {
             hopeText = hopeText + arr[0] + " FOF" + " - " + arr[arr.length - 1] + " FOF";
         }
         egret.Tween.get(HopeResult)
-            .to({alpha: 0.2}, 50)
-            .to({alpha: 1}, 400)
+            .to({ alpha: 0.2 }, 50)
+            .to({ alpha: 1 }, 400)
         HopeResult.text = hopeText;
         TotalAmount.text = totalText;
     }

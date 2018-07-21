@@ -1,7 +1,10 @@
+
+var web3;
+var ethers;
+var Wallet = ethers.Wallet;
 /** 游戏数据 */
-let ACCADDR:string = "0xA5B725E03Ad76Ad9be88CBb3207D5a306C58600f";    //账户地址
-let CONCADDR:string = "0xb6d0C97b8bc28f50f40A9b43109fEB17e8C6FA0b";   //合约地址
-//let CONCADDR:string = window.location.href.split('?')[1];   //合约地址
+let CONCADDR:string = window.location.href.split('?')[1];   //合约地址
+// let CONCADDR:string = "0x2114E16B09a5e5253740C1A7fEd0c50CadC7Cbd8"
 let CONTRACTINFO;//合约信息
 let CONTRACTINSTANCE;//合约实例
 
@@ -12,22 +15,14 @@ let selected:Object = { //选择的下注方。
 };
 let multiplying:string = "1"; //倍率
 
-function getBalance(addr:string, obj?:any, callback?:Function) {
-    web3.eth.getBalance(addr).then((data) => {
-        let amount = web3.utils.fromWei(data, 'ether');
+function getBalance(addr:string, obj?:any, callback?:Function) {    //获取余额
+    web3.eth.getBalance(addr).then((balance) => {
+        let amount = web3.utils.fromWei(balance, 'ether');
         amount = Number(amount).toFixed(2);
         obj && (obj.text = amount);
-        callback && callback(data);
-    })
-
-   
-}
-
-function getCurrentBalance(obj?:any){
-    web3.eth.getCurrentBalance(CONCADDR).then((data) => {
-        let amount = web3.utils.fromWei(data, 'ether');
-        amount = Number(amount).toFixed(2);
-        obj.text = amount;
+        callback && callback(balance);
     })
 }
+
+
 

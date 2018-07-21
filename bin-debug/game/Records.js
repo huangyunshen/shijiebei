@@ -44,16 +44,13 @@ var Records = (function (_super) {
         content.addChild(close);
         close.touchEnabled = true;
         close.addEventListener(egret.TouchEvent.TOUCH_TAP, this.closeModal, this);
-        var message = new CreateTextField({ x: 45, y: 160, width: 695, height: 100, tx: "" }).create();
-        message.verticalAlign = egret.VerticalAlign.MIDDLE;
-        content.addChild(message);
         var myScrollView = new egret.ScrollView();
         myScrollView.width = 980;
         myScrollView.height = 1385;
         myScrollView.y = 135;
         var sprite = new egret.Sprite();
         for (var i = 0; i < this.arr.length; i++) {
-            var con = this.record(i, "世界杯", this.arr[i].time, CONTRACTINFO, this.arr[i].selected, this.arr[i].multiple, this.arr[i].score.homeTeam, this.arr[i].score.guestTeam);
+            var con = this.record(i, this.arr[i].time, CONTRACTINFO, this.arr[i].selected, this.arr[i].multiple, this.arr[i].score.homeTeam, this.arr[i].score.guestTeam);
             sprite.addChild(con);
         }
         myScrollView.setContent(sprite);
@@ -65,7 +62,7 @@ var Records = (function (_super) {
         records = null;
         eventButtonCtr(true);
     };
-    Records.prototype.record = function (_index, _Name, _time, _info, _selected, _multiple, _hScore, _vScore) {
+    Records.prototype.record = function (_index, _time, _info, _selected, _multiple, _hScore, _vScore) {
         var singAmount = Number(_info[8]);
         var container = new egret.Sprite();
         var width = 920;
@@ -81,7 +78,7 @@ var Records = (function (_super) {
         bg.graphics.drawRoundRect(0, 0, width, height, 15);
         bg.graphics.endFill();
         container.addChild(bg);
-        var name = new CreateTextField({ x: 20, y: 26, width: 400, align: "left", tx: _Name, size: 40 }).create();
+        var name = new CreateTextField({ x: 20, y: 26, width: 400, align: "left", tx: _info[1], size: 40 }).create();
         container.addChild(name);
         var time = new CreateTextField({
             x: 400,

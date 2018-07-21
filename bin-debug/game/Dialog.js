@@ -35,7 +35,7 @@ var Dialog = (function (_super) {
         content.y = 610;
         var bg = createBitmapByName("tuanchuang_png");
         content.addChild(bg);
-        var title = new CreateTextField({ x: 0, y: 22, width: 280, tx: "\u63D0\u793A" }).create();
+        var title = new CreateTextField({ x: 0, y: 22, width: 280, tx: "\u63D0\u793A", color: 0x57ffed }).create();
         content.addChild(title);
         var close = createBitmapByName("close_small_png");
         close.x = 642;
@@ -67,8 +67,7 @@ var Dialog = (function (_super) {
     };
     Dialog.prototype.submitEvent = function (flag) {
         if (dialog.url) {
-            console.log(dialog.url);
-            location.href = dialog.url;
+            window.open(dialog.url);
         }
         this.closeModal(flag);
     };

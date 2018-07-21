@@ -1,5 +1,10 @@
 let dialog;//消息弹窗
 let records;//记录界面
+let password;//密码界面
+let infoMsg;//应用信息
+let contractBalance;//合约余额
+let sourceCode;//源码
+let myBalance;
 let eventButton: Object = {};//保存点击事件的组件，用于批量暂停或打开点击事件
 let eventDialog: Object = {};//消息弹窗点击事件，用于批量暂停或打开点击事件
 
@@ -90,7 +95,12 @@ class CreateTextField {
 转换时间
  */
 function timestampToTime(timestamp) {
-    let date = new Date(timestamp * 1)//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    if(timestamp.length === 10){
+        timestamp = timestamp * 1000
+    } else {
+        timestamp = timestamp * 1
+    }
+    let date = new Date(timestamp)//时间戳为10位需*1000，时间戳为13位的话不需乘1000
     let Y = date.getFullYear() + '.';
     let M = fillZero(date.getMonth() + 1) + '.';
     let D = fillZero(date.getDate()) + ' ';
@@ -110,17 +120,14 @@ function fillZero(time) {
  */
 function getRecord(size: number, num: number) {
     return new Promise((resolve, reject) => {
-        let url = "http://39.104.81.103/api/requestGuessRecord.php";
+        let url = "/api/requestGuessRecord.php";
 
         let data = {
-            "addr": ACCADDR,
+            "addr": getActiveAccount().address,
             "liveId": CONTRACTINFO[11],
             "pageSize": size,
             "pageNum": num
         }
-
-        // let eeeeeeefe = JSON.parse(str.replace(/\'/g,'"'))
-        // console.log(eeeeeeefe);
 
         let request = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
@@ -142,4 +149,36 @@ function getRecord(size: number, num: number) {
             console.log(err);
         }, this);
     })
+}
+
+/**
+ * 账户相关
+ */
+function  ifWalletExist() {
+    let walletJSON = localStorage.getItem('web3js_wallet')
+    if (walletJSON) {
+        return walletJSON
+    } else {
+        return false
+    }
+}
+function  loadWallet(pwd) {
+    return web3.eth.accounts.wallet.load(pwd)
+}
+function  verifyWalletPwd(pwd) {
+    return new Promise((resolve, reject) => {
+        try {
+            let wallet = this.loadWallet(pwd);
+            resolve(wallet);
+        }
+        catch (e) {
+            reject(e);
+        }
+    })
+}
+function  getActiveAccount() {
+    let wallet = web3.eth.accounts.wallet
+    let index = localStorage.getItem('active_account')
+    let activeAccount = wallet[index] || new Error('Wallet Is Locked')
+    return activeAccount
 }
