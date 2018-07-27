@@ -61,7 +61,7 @@ class Main extends egret.DisplayObjectContainer {
                 RES.getResByUrl("contract/playGame.json", function (code) {
                     CONTRACTINSTANCE = new web3.eth.Contract(code.abi, CONCADDR);
                     CONTRACTINSTANCE.methods.getSetting().call().then((data) => {
-                        // console.log(data);
+                        console.log(data);
                         CONTRACTINFO = data;
                         resolve();
                     })

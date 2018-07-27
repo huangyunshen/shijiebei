@@ -1,7 +1,7 @@
 var web3;
 var ethers;
 var Wallet = ethers.Wallet;
-var CONCADDR = window.location.href.split('?')[1];
+var CONCADDR = "0x839f077B4EFDCe7c65461d96217313F82D118451";
 var CONTRACTINFO;
 var CONTRACTINSTANCE;
 var selected = {

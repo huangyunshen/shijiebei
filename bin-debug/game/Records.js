@@ -159,7 +159,7 @@ var Records = (function (_super) {
         gameParty.addChild(teamText1);
         var teamText2 = new CreateTextField({ x: 336, y: 120, width: 180, tx: _info[3], size: 24 }).create();
         gameParty.addChild(teamText2);
-        if (_hScore) {
+        if (_hScore > -1) {
             var scoreText1 = new CreateTextField({
                 x: 355,
                 y: 233,
@@ -169,7 +169,7 @@ var Records = (function (_super) {
             }).create();
             content.addChild(scoreText1);
         }
-        if (_vScore) {
+        if (_vScore > -1) {
             var scoreText2 = new CreateTextField({
                 x: 695,
                 y: 233,

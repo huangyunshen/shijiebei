@@ -5,27 +5,27 @@ contract Quiz {
     uint public gameType = 2;
     address public creator = msg.sender;
     uint public creationTime;
-    uint public historyTotalCoins = 0; // 历史下注总额
+    uint public historyTotalCoins = 0; // Total note in history
 
-    uint public liveId;//赛事ID
-    string homeTeam; //主队
-    string visitingTeam; //客队
-    uint oddsH; //主胜赔率
-    uint oddsD; //平赔率
-    uint oddsV; //客胜赔率
-    uint deadline; // 截止日期
-    uint singleBetCoin; //单注金额
-    uint hConcedePoints = 0; //主队让球
-    uint vConcedePoints = 0; //客队让球
-    address [] hVictory;  // 保存选主胜0的地址
-    mapping(address => uint) hVictoryMap; // 选主胜用户的下注金额
-    address [] vVictory;   // 保存客胜1的地址
-    mapping(address => uint) vVictoryMap; // 选客胜用户的下注金额
-    address [] draw;    // 保存选平2的地址
-    mapping(address => uint) drawMap; // 选平局用户的下注金额
+    uint public liveId;//Event ID
+    string homeTeam; //Home team
+    string visitingTeam; //Visiting team
+    uint oddsH; //Main winning odds
+    uint oddsD; //Flat rate
+    uint oddsV; //Winning odds
+    uint deadline; // Closing date
+    uint singleBetCoin; //Single amount of money
+    uint hConcedePoints = 0; //Home teamLet the ball
+    uint vConcedePoints = 0; //Visiting teamLet the ball
+    address [] hVictory;  // Save the address of 0 of the main victory
+    mapping(address => uint) hVictoryMap; // Select the amount of the subscribers for the main winner
+    address [] vVictory;   // Save the address of 1
+    mapping(address => uint) vVictoryMap; // Choose the amount of the subscribers
+    address [] draw;    // Save the address of the 2
+    mapping(address => uint) drawMap; // The amount of the subscriber's bet
     uint256 public availableBalance = 0;
 
-    event returnBetResult(uint code, string msg, uint hCore, uint vCore); // 返回是否下注成功 101-"已过下注截止时间" 201-"下注成功" 205-"结算完成"
+    event returnBetResult(uint code, string msg, uint hCore, uint vCore); // Returns whether the bet is successful. 101- "has already paid off the deadline" 201- "bet successful" 205- "settlement completed".
 
     function deposit() public payable {
         uint balance = getCurrentBalance();
@@ -36,19 +36,19 @@ contract Quiz {
         return (contractName, gameType, creator, creationTime, historyTotalCoins);
     }
 
-    function getNow() public constant returns (uint){//获取当前时间
+    function getNow() public constant returns (uint){//Get the current time
         uint Now = block.timestamp * 1000;
         return Now;
     }
 
     /*
-    * @homeTeam 主队
-    * @visitingTeam 客队
-    * @oddsH 主胜赔率 0
-    * @oddsD 平赔率   2
-    * @oddsV 客胜赔率 1
-    * solidity里面不支持小数计算
-    * 传入的赔率扩大了100倍，最后的结果需要除以100
+    * @homeTeam Home team
+    * @visitingTeam Visiting team
+    * @oddsH Main winning odds 0
+    * @oddsD Flat rate   2
+    * @oddsV Winning odds 1
+    * soliditySmall numbers are not supported in it
+    * The incoming odds have increased by 100 times, and the final result needs to be divided by 100.
     */
     constructor(string _name, string _homeTeam, string _visitingTeam, uint _oddsH, uint _oddsD, uint _oddsV, uint _deadline, uint _singleCoin, uint _hConcedePoints, uint _vConcedePoints, uint _liveId) public{
         contractName = _name;
@@ -69,26 +69,26 @@ contract Quiz {
         return liveId;
     }
 
-    // 获取当前出块时间戳 (单位是秒)
+    // Get the current block timestamp (unit is second)
     function getTimestamp() public constant returns (uint) {
         return block.timestamp;
     }
-    // 返回当前合约账户的余额
+    // Return the balance of the current contract account
     function getCurrentBalance() public constant returns (uint256) {
         return address(this).balance;
     }
 
-    // 返回配置参数
+    // Return configuration parameters
     function getSetting() public constant returns (uint, string, string, string, uint, uint, uint, uint, uint, uint, uint, uint) {
         return (gameType, contractName, homeTeam, visitingTeam, oddsH, oddsD, oddsV, deadline, singleBetCoin, hConcedePoints, vConcedePoints, liveId);
     }
 
-    // 下注函数
+    // Injection function
     /*
-    * @addr 下注地址
-    * @choose 选择胜负平 ------- 0 1 2 , -1 代表没有选
-    * @coin 下注金额
-    * @num 下注数 ------- 1 2 3
+    * @addr Note address
+    * @choose Choice of victory and defeat - - - - - - - 012, -1 representative is not selected
+    * @coin Amount of note
+    * @num The number of notes - - - - - 123
     */
     function betFun(address addr, uint [3] choose, uint coin, uint num, uint maximum) public payable {
         if (block.timestamp * 1000 > deadline) {
@@ -137,17 +137,17 @@ contract Quiz {
                 }
             }
             availableBalance = availableBalance + coin - maximum;
-            //奖池可用余额 = 当前可用余额 + 下注总金额 - 最大奖金
+            //The available balance of the prize pool = the current available balance + the total amount of the bet - the maximum bonus.
         }
     }
 
-    // 结算函数
-    // @_result 传入谁赢 0 1 2 / 主胜 客胜 平
+    // Settlement function
+    // @_result Who wins 012 / winner Ke Shengping
     function getResult(uint _hCore, uint _vCore) public {
         uint h = _hCore + vConcedePoints;
-        //主队得分+让球分数
+        //Home team Score +Let the ball score
         uint v = _vCore + hConcedePoints;
-        //客队得分+让球分数
+        //Visiting team Score +Let the ball score
         if (h > v) {
             for (uint i = 0; i < hVictory.length; i++) {
                 transferCoin(hVictory[i], hVictoryMap[hVictory[i]] * oddsH / 100);
@@ -171,7 +171,7 @@ contract Quiz {
         //        }
     }
 
-    // 提现函数,只有创建者账户可以提现
+    // The present function, only the creator's account can be presented
     function drawings(uint _coin) public payable {
         if (msg.sender == creator) {
             uint _balance = getCurrentBalance();
@@ -179,7 +179,7 @@ contract Quiz {
         }
     }
 
-    // 重置函数
+    // Reset function
     function reset() private {
         for (uint i = 0; i < hVictory.length; i++) {
             hVictoryMap[hVictory[i]] = 0;
@@ -195,10 +195,10 @@ contract Quiz {
         draw.length = 0;
     }
 
-    // 转账函数
+    // Transfer function
     /*
-    * @_to 目标地址
-    * @_coins 金额
+    * @_to Target address
+    * @_coins Amount of money
     */
     function transferCoin(address _to, uint _coins) private {
         _to.transfer(_coins);

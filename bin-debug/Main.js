@@ -118,6 +118,7 @@ var Main = (function (_super) {
                 RES.getResByUrl("contract/playGame.json", function (code) {
                     CONTRACTINSTANCE = new web3.eth.Contract(code.abi, CONCADDR);
                     CONTRACTINSTANCE.methods.getSetting().call().then(function (data) {
+                        console.log(data);
                         CONTRACTINFO = data;
                         resolve();
                     });

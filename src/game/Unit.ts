@@ -120,34 +120,38 @@ function fillZero(time) {
  */
 function getRecord(size: number, num: number) {
     return new Promise((resolve, reject) => {
-        let url = "/api/requestGuessRecord.php";
+        let addr = getActiveAccount().address
+        if(!addr) {
+            resolve([])
+        } else {            
+            let url = "http://39.104.81.103/api/requestGuessRecord.php";
 
-        let data = {
-            "addr": getActiveAccount().address,
-            "liveId": CONTRACTINFO[11],
-            "pageSize": size,
-            "pageNum": num
+            let data = {
+                "addr": addr,
+                "liveId": CONTRACTINFO[11],
+                "pageSize": size,
+                "pageNum": num
+            }        
+            let request = new egret.HttpRequest();
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open(url, egret.HttpMethod.POST);
+            request.setRequestHeader("Content-Type", "application/json");
+            request.send(JSON.stringify(data));
+            request.addEventListener(egret.Event.COMPLETE, (event) => {
+                let request = <egret.HttpRequest>event.currentTarget;
+                let data = JSON.parse(request.response);
+                if(data.code === "200") {
+                    resolve(data.result);
+                } else {
+                    reject(data)
+                    console.log(data);
+                }
+            }, this);
+            request.addEventListener(egret.IOErrorEvent.IO_ERROR, (err) => {
+                reject(err);
+                console.log(err);
+            }, this);
         }
-
-        let request = new egret.HttpRequest();
-        request.responseType = egret.HttpResponseType.TEXT;
-        request.open(url, egret.HttpMethod.POST);
-        request.setRequestHeader("Content-Type", "application/json");
-        request.send(JSON.stringify(data));
-        request.addEventListener(egret.Event.COMPLETE, (event) => {
-            let request = <egret.HttpRequest>event.currentTarget;
-            let data = JSON.parse(request.response);
-            if(data.code === "200") {
-                resolve(data.result);
-            } else {
-                reject(data)
-                console.log(data);
-            }
-        }, this);
-        request.addEventListener(egret.IOErrorEvent.IO_ERROR, (err) => {
-            reject(err);
-            console.log(err);
-        }, this);
     })
 }
 

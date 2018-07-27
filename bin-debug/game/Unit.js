@@ -104,33 +104,39 @@ function fillZero(time) {
 function getRecord(size, num) {
     var _this = this;
     return new Promise(function (resolve, reject) {
-        var url = "/api/requestGuessRecord.php";
-        var data = {
-            "addr": getActiveAccount().address,
-            "liveId": CONTRACTINFO[11],
-            "pageSize": size,
-            "pageNum": num
-        };
-        var request = new egret.HttpRequest();
-        request.responseType = egret.HttpResponseType.TEXT;
-        request.open(url, egret.HttpMethod.POST);
-        request.setRequestHeader("Content-Type", "application/json");
-        request.send(JSON.stringify(data));
-        request.addEventListener(egret.Event.COMPLETE, function (event) {
-            var request = event.currentTarget;
-            var data = JSON.parse(request.response);
-            if (data.code === "200") {
-                resolve(data.result);
-            }
-            else {
-                reject(data);
-                console.log(data);
-            }
-        }, _this);
-        request.addEventListener(egret.IOErrorEvent.IO_ERROR, function (err) {
-            reject(err);
-            console.log(err);
-        }, _this);
+        var addr = getActiveAccount().address;
+        if (!addr) {
+            resolve([]);
+        }
+        else {
+            var url = "http://39.104.81.103/api/requestGuessRecord.php";
+            var data = {
+                "addr": addr,
+                "liveId": CONTRACTINFO[11],
+                "pageSize": size,
+                "pageNum": num
+            };
+            var request = new egret.HttpRequest();
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open(url, egret.HttpMethod.POST);
+            request.setRequestHeader("Content-Type", "application/json");
+            request.send(JSON.stringify(data));
+            request.addEventListener(egret.Event.COMPLETE, function (event) {
+                var request = event.currentTarget;
+                var data = JSON.parse(request.response);
+                if (data.code === "200") {
+                    resolve(data.result);
+                }
+                else {
+                    reject(data);
+                    console.log(data);
+                }
+            }, _this);
+            request.addEventListener(egret.IOErrorEvent.IO_ERROR, function (err) {
+                reject(err);
+                console.log(err);
+            }, _this);
+        }
     });
 }
 function ifWalletExist() {
