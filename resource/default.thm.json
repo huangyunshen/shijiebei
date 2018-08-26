@@ -1,0 +1,15 @@
+{
+	"skins": {},
+	"autoGenerateExmlsList": true,
+	"exmls": [
+		"resource/eui_modules/ContainerUI.exml",
+		"resource/eui_modules/DialogUI.exml",
+		"resource/eui_modules/PasswordUI.exml",
+		"resource/eui_modules/RecordPanelUI.exml",
+		"resource/eui_modules/RecordUI.exml",
+		"resource/eui_modules/AppInfoUI.exml",
+		"resource/eui_modules/CodeUI.exml",
+		"resource/eui_modules/LanguageUI.exml"
+	],
+	"path": "resource/default.thm.json"
+}

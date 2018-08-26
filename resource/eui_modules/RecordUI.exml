@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RecordUI" width="1080" height="1716" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="modal" left="0" right="0" top="0" bottom="0" fillAlpha="0.7"/>
+	<e:Group width="980" height="1540" horizontalCenter="0" verticalCenter="0">
+		<e:Image source="jilu_bg_png" verticalCenter="0" horizontalCenter="0" x="0" y="0" scaleX="1" scaleY="1"/>
+		<e:Label text="{langData.title}" anchorOffsetX="0" left="0" top="0" width="363.33" anchorOffsetY="0" height="104.67" verticalAlign="middle" textAlign="center" size="54" textColor="0x57ffed"/>
+		<e:Image id="close" source="close_png" right="-7" top="-7"/>
+		<e:Scroller height="1375" verticalCenter="52" width="920" horizontalCenter="0">
+			<e:Group id="content" width="920"/>
+		</e:Scroller>
+	</e:Group>
+</e:Skin>

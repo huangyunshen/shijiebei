@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="CodeUI" width="1080" height="1716" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="modal" left="0" right="0" top="0" bottom="0" fillAlpha="0.7"/>
+	<e:Group width="980" height="1540" horizontalCenter="0" verticalCenter="0">
+		<e:Image source="jilu_bg_png" horizontalCenter="0" verticalCenter="0"/>
+		<e:Label text="{langData.title}" anchorOffsetX="0" left="0" top="0" width="364" anchorOffsetY="0" height="105" verticalAlign="middle" textAlign="center" size="50" textColor="0x57ffed"/>
+		<e:Image id="close" source="close_png" right="-6" top="-6"/>
+		<e:Scroller width="920" height="1375" y="135" horizontalCenter="0">
+			<e:Group>
+				<e:Label text="{codes}" y="33" left="0" right="0" size="34" lineSpacing="15"/>
+			</e:Group>
+		</e:Scroller>
+	</e:Group>
+</e:Skin>

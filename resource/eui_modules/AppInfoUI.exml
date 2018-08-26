@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="AppInfoUI" width="1080" height="1716" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="modal" left="0" right="0" top="0" bottom="0" fillAlpha="0.7"/>
+	<e:Group width="920" height="880" horizontalCenter="0" verticalCenter="0">
+		<e:Image source="zjxx_bg_png" left="0" right="0" top="0" bottom="0"/>
+		<e:Label text="{langData.title}" anchorOffsetX="0" left="0" top="0" width="340" anchorOffsetY="0" height="98" verticalAlign="middle" textAlign="center" size="48" textColor="0x57ffed"/>
+		<e:Image id="close" source="close_png" right="-7" top="-6" anchorOffsetY="0" height="113" anchorOffsetX="0" width="172"/>
+		<e:Scroller width="860" height="752" x="30" y="128">
+			<e:Group>
+				<e:Group width="860" height="80" x="193" y="222">
+					<e:Rect left="0" right="0" top="0" bottom="0" ellipseWidth="20" ellipseHeight="20" fillColor="0x60ffcc" fillAlpha="0.12"/>
+					<e:Label text="{langData.info1}" x="30" top="0" bottom="0" width="240" verticalAlign="middle" size="34" textColor="0xf0e92f" textAlign="left"/>
+					<e:Label text="{data.name}" x="270" top="0" bottom="0" verticalAlign="middle" textAlign="left" size="34"/>
+				</e:Group>
+				<e:Group width="860" height="126" x="203" y="232">
+					<e:Rect left="0" right="0" top="0" bottom="0" ellipseWidth="20" ellipseHeight="20" fillColor="0x60FFCC" fillAlpha="0.12"/>
+					<e:Label x="30" width="240" size="34" textColor="0xF0E92F" textAlign="left" top="0" height="80" text="{langData.info2}" verticalAlign="middle"/>
+					<e:Label x="270" top="0" bottom="0" textAlign="left" size="34" verticalAlign="middle" text="{data.creator}" width="560" lineSpacing="10"/>
+				</e:Group>
+				<e:Group width="860" height="126" x="213" y="242">
+					<e:Rect left="0" right="0" top="0" bottom="0" ellipseWidth="20" ellipseHeight="20" fillColor="0x60FFCC" fillAlpha="0.12"/>
+					<e:Label x="30" width="240" verticalAlign="middle" size="34" textColor="0xF0E92F" textAlign="left" top="0" height="80" text="{langData.info3}"/>
+					<e:Label x="270" top="0" bottom="0" textAlign="left" size="34" verticalAlign="middle" text="{data.appAddr}" width="560" lineSpacing="10"/>
+				</e:Group>
+				<e:Group width="860" height="80" x="223" y="252">
+					<e:Rect left="0" right="0" top="0" bottom="0" ellipseWidth="20" ellipseHeight="20" fillColor="0x60FFCC" fillAlpha="0.12"/>
+					<e:Label x="30" top="0" bottom="0" width="240" verticalAlign="middle" size="34" textColor="0xF0E92F" textAlign="left" text="{langData.info4}"/>
+					<e:Label x="270" top="0" bottom="0" verticalAlign="middle" textAlign="left" size="34" text="{data.creatTime}"/>
+				</e:Group>
+				<e:Group width="860" height="80" x="233" y="262">
+					<e:Rect left="0" right="0" top="0" bottom="0" ellipseWidth="20" ellipseHeight="20" fillColor="0x60FFCC" fillAlpha="0.12"/>
+					<e:Label x="30" top="0" bottom="0" width="240" verticalAlign="middle" size="34" textColor="0xF0E92F" textAlign="left" text="{langData.info5}"/>
+					<e:Label x="270" top="0" bottom="0" verticalAlign="middle" textAlign="left" size="34" text="{data.balance}"/>
+				</e:Group>
+				<e:Group width="860" height="80" x="243" y="272">
+					<e:Rect left="0" right="0" top="0" bottom="0" ellipseWidth="20" ellipseHeight="20" fillColor="0x60FFCC" fillAlpha="0.12"/>
+					<e:Label x="30" top="0" bottom="0" width="240" verticalAlign="middle" size="34" textColor="0xF0E92F" textAlign="left" text="{langData.info6}"/>
+					<e:Label x="270" top="0" bottom="0" verticalAlign="middle" textAlign="left" size="34" text="{data.historyTotalCoins}"/>
+				</e:Group>
+				<e:layout>
+					<e:VerticalLayout gap="30" verticalAlign="top"/>
+				</e:layout>
+			</e:Group>
+		</e:Scroller>
+	</e:Group>
+</e:Skin>

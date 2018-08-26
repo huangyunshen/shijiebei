@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RecordPanelUI" width="920" height="610" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect left="0" right="0" top="0" bottom="0" ellipseWidth="20" ellipseHeight="20" fillColor="0x095e35"/>
+	<e:Group width="860" height="550" horizontalCenter="0" verticalCenter="0">
+		<e:Label text="{data.title}" size="40" verticalAlign="middle" textAlign="left" anchorOffsetX="0" left="0" top="0" width="400" maxWidth="400" maxHeight="40" height="40"/>
+		<e:Group id="timeTitle" width="460" height="34" x="401" y="3">
+			<e:Label size="34" horizontalCenter="0" verticalCenter="0" text="{langData.timeTitle}" verticalAlign="middle" textAlign="center"/>
+			<e:Label text="{data.bottomPourTime}" size="36" horizontalCenter="0" verticalCenter="0" textAlign="center" verticalAlign="middle"/>
+		</e:Group>
+		<e:Group height="290" y="60" left="0" right="0">
+			<e:Rect left="0" right="0" top="0" bottom="0" fillColor="0x60ffcc" fillAlpha="0.12" ellipseWidth="20" ellipseHeight="20"/>
+			<e:Group width="300" x="2" top="0" bottom="0">
+				<e:Group id="hWinGroup" width="270" height="36" x="30" y="50">
+					<e:Label text="{langData.hWin}" horizontalCenter="0" verticalCenter="0" size="36" verticalAlign="middle"/>
+					<e:Label horizontalCenter="0" verticalCenter="0" size="38" verticalAlign="middle" text="{data.hOdds}"/>
+				</e:Group>
+				<e:Group id="pingGroup" width="270" height="36" x="30" y="120">
+					<e:Label horizontalCenter="0" verticalCenter="0" size="36" verticalAlign="middle" text="{langData.ping}"/>
+					<e:Label horizontalCenter="0" verticalCenter="0" size="38" verticalAlign="middle" text="{data.pOdds}"/>
+				</e:Group>
+				<e:Group id="vWinGroup" width="270" height="36" x="30" y="200">
+					<e:Label horizontalCenter="0" verticalCenter="0" size="36" verticalAlign="middle" text="{langData.vWin}"/>
+					<e:Label horizontalCenter="0" verticalCenter="0" size="38" verticalAlign="middle" text="{data.vOdds}"/>
+				</e:Group>
+			</e:Group>
+			<e:Group width="183" height="183" x="300" y="30">
+				<e:Image source="contry_bg_png" x="0" y="0" scaleX="1" scaleY="1"/>
+				<e:Image source="team1_png" bottom="1" scaleX="0.71" scaleY="0.71" x="4"/>
+			</e:Group>
+			<e:Image source="vs_png" x="512" y="95"/>
+			<e:Group width="183" height="183" x="635" y="30">
+				<e:Image source="contry_bg_png" x="0" y="0" scaleX="1" scaleY="1"/>
+				<e:Image source="team2_png" scaleX="0.71" scaleY="0.71" x="3.5" y="51.5"/>
+			</e:Group>
+			<e:Label text="{data.hScore}" x="300" y="230" size="40" textAlign="center" verticalAlign="middle" width="186"/>
+			<e:Label text="{data.vScore}" x="635" y="230" size="40" textAlign="center" verticalAlign="middle" width="186"/>
+		</e:Group>
+		<e:Group width="550" height="200" x="0" y="350">
+			<e:Group id="singleAmountGroup" height="34" y="38" left="0" right="0">
+				<e:Label text="{langData.singleAmount}" y="2" left="0" size="34"/>
+				<e:Label size="36" verticalCenter="0" right="0" text="{data.singleAmount}"/>
+			</e:Group>
+			<e:Group id="totalAmountGroup" height="34" y="100" left="0" right="0">
+				<e:Label y="2" left="0" size="34" text="{langData.totalAmount}"/>
+				<e:Label size="36" verticalCenter="0" right="0" text="{data.totalAmount}"/>
+			</e:Group>
+			<e:Group id="rewardAmountGroup" height="34" y="160" left="0" right="0">
+				<e:Label y="2" left="0" size="34" text="{langData.rewardAmount}"/>
+				<e:Label size="36" verticalCenter="0" right="0" text="{data.rewardAmount}"/>
+			</e:Group>
+		</e:Group>
+		<e:Image id="congratulation" source="gxzj_png" x="560" bottom="0" visible="false"/>
+	</e:Group>
+</e:Skin>
